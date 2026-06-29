@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samatvam — Finding Balance Online</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#f6efe3;
+  --paper-dim:#ece2cf;
+  --maroon:#5b2333;
+  --maroon-deep:#3c1521;
+  --marigold:#dc922e;
+  --slate-green:#33483b;
+  --ink:#291c16;
+  --ink-soft:#5a4d42;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); overflow-x:hidden;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;} }
+
+h1,h2,h3{font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.05;}
+.eyebrow{font-family:'Inter',sans-serif; text-transform:uppercase; letter-spacing:0.16em; font-size:0.7rem; font-weight:600; color:var(--marigold);}
+
+section{padding:6rem 8vw; position:relative;}
+@media (max-width:760px){ section{padding:4rem 6vw;} }
+
+/* HERO */
+.hero{
+  background:radial-gradient(ellipse at 70% 15%, #4a1d2a 0%, var(--maroon-deep) 65%);
+  color:var(--paper);
+  min-height:94vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding-top:6.5rem;
+}
+.shloka{
+  position:absolute; top:2.2rem; left:8vw;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:0.95rem; color:#e3b97a; opacity:0.85;
+}
+.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:3rem; align-items:center;}
+@media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+.hero h1{font-size:clamp(2.3rem,5vw,3.9rem);}
+.hero h1 em{font-style:italic; color:var(--marigold); font-weight:500;}
+.hero p.lede{margin-top:1.3rem; font-size:1.12rem; color:#e6dccb; max-width:36ch; line-height:1.6;}
+.hero-cta{margin-top:2.1rem; display:flex; gap:1rem; flex-wrap:wrap;}
+.btn{font-family:'Inter',sans-serif; font-weight:600; font-size:0.9rem; padding:0.92rem 1.7rem; border-radius:3px; border:1px solid transparent; cursor:pointer; transition:transform 0.25s ease, background 0.25s ease; display:inline-block; text-decoration:none;}
+.btn-primary{background:var(--marigold); color:var(--maroon-deep);}
+.btn-primary:hover{transform:translateY(-2px); background:#e9a44a;}
+.btn-ghost{background:transparent; border:1px solid rgba(246,239,227,0.35); color:var(--paper);}
+.btn-ghost:hover{background:rgba(246,239,227,0.08); transform:translateY(-2px);}
+
+/* SCALE (signature element) */
+.scale-wrap{display:flex; justify-content:center;}
+.scale-svg{width:100%; max-width:430px; overflow:visible;}
+.pan-left, .pan-right{transition:transform 1.4s cubic-bezier(.4,.2,.2,1);}
+.beam{transition:transform 1.4s cubic-bezier(.4,.2,.2,1); transform-origin:215px 70px;}
+.scale-svg.tilt .beam{transform:rotate(-9deg);}
+.scale-svg.tilt .pan-left{transform:translateY(22px);}
+.scale-svg.tilt .pan-right{transform:translateY(-14px);}
+.scale-svg.balanced .beam{transform:rotate(0deg);}
+.scale-svg.balanced .pan-left{transform:translateY(0);}
+.scale-svg.balanced .pan-right{transform:translateY(0);}
+.scale-label{font-family:'Inter',sans-serif; font-size:0.66rem; fill:#e6dccb; letter-spacing:0.02em;}
+.scale-caption{text-align:center; margin-top:1rem; font-size:0.82rem; color:#c9bba2; font-style:italic; font-family:'Cormorant Garamond',serif;}
+
+/* WEAKNESS */
+.section-head{max-width:660px; margin-bottom:3.2rem;}
+.section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem); margin-top:0.5rem;}
+.section-head p{margin-top:1rem; color:var(--ink-soft); font-size:1.05rem; line-height:1.6;}
+
+.weak-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem;}
+@media (max-width:760px){ .weak-grid{grid-template-columns:1fr;} }
+.flip-card{position:relative; height:230px; perspective:1400px; cursor:pointer;}
+.flip-inner{position:relative; width:100%; height:100%; transition:transform 0.7s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d;}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-face{position:absolute; inset:0; border-radius:6px; padding:1.6rem; backface-visibility:hidden; display:flex; flex-direction:column; justify-content:space-between;}
+.flip-front{background:var(--paper-dim); border:1px solid #ddcdac;}
+.flip-back{background:var(--maroon); color:var(--paper);}
+.flip-tag{font-size:0.66rem; text-transform:uppercase; letter-spacing:0.12em; font-weight:700;}
+.flip-front .flip-tag{color:var(--maroon);}
+.flip-back .flip-tag{color:var(--marigold);}
+.flip-card h3{font-size:1.15rem; margin-top:0.55rem; font-weight:600;}
+.flip-card p{font-size:0.9rem; margin-top:0.5rem; line-height:1.5; color:var(--ink-soft);}
+.flip-back p{color:#e6dccb;}
+.flip-hint{font-size:0.74rem; color:var(--slate-green); font-style:italic; margin-top:auto; align-self:flex-end;}
+.flip-back .flip-hint{color:#dcb87a;}
+
+/* PROOF STRIP */
+.proof-strip{background:var(--ink); color:var(--paper); padding:1.6rem 8vw; display:flex; gap:2rem; flex-wrap:wrap; align-items:center; justify-content:space-between; font-size:0.85rem;}
+.proof-strip .item{display:flex; align-items:center; gap:0.6rem; color:#d9cdb8;}
+.proof-strip strong{color:var(--marigold); font-family:'Cormorant Garamond',serif; font-size:1.05rem;}
+
+/* FIX SECTION */
+.fix-section{background:var(--maroon-deep); color:var(--paper);}
+.fix-section .eyebrow{color:#cba368;}
+.fix-list{display:flex; flex-direction:column; margin-top:1rem;}
+.fix-row{display:grid; grid-template-columns:60px 1fr 1fr; gap:1.8rem; padding:1.8rem 0; border-top:1px solid rgba(246,239,227,0.14); align-items:start;}
+@media (max-width:760px){ .fix-row{grid-template-columns:1fr; gap:0.6rem;} }
+.fix-num{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.6rem; color:var(--marigold); opacity:0.85;}
+.fix-row h4{font-family:'Cormorant Garamond',serif; font-weight:500; font-size:1.15rem; color:#e3b97a; text-decoration:line-through; text-decoration-color:rgba(91,35,51,0.7); text-decoration-thickness:2px;}
+.fix-row .now{font-size:0.98rem; line-height:1.55; color:#e6dccb;}
+.fix-row .now b{color:var(--paper); font-weight:600;}
+
+/* OUTCOME */
+.outcome{background:var(--paper); text-align:center;}
+.outcome-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; text-align:left;}
+@media (max-width:760px){ .outcome-grid{grid-template-columns:1fr;} }
+.outcome-card{background:var(--paper-dim); border:1px solid #ddcdac; border-radius:6px; padding:1.8rem;}
+.outcome-card .eyebrow{color:var(--maroon);}
+.outcome-card h3{font-size:1.3rem; margin-top:0.5rem;}
+.outcome-card p{font-size:0.92rem; color:var(--ink-soft); margin-top:0.6rem; line-height:1.55;}
+
+/* CTA */
+.cta{background:linear-gradient(135deg, var(--maroon), var(--marigold)); color:#2a1505; text-align:center; padding:5.5rem 8vw;}
+.cta h2{font-size:clamp(2rem,4vw,3rem); color:#fffaf0;}
+.cta p{max-width:46ch; margin:1.1rem auto 0; font-size:1.05rem; color:#fbeede;}
+.cta .btn-primary{background:#2a1505; color:var(--paper); margin-top:2.2rem;}
+.cta .btn-primary:hover{background:#3b1d0a;}
+.cta-contacts{display:flex; gap:1.8rem; flex-wrap:wrap; justify-content:center; margin-top:1.6rem; font-size:0.88rem; font-weight:600; color:#fffaf0;}
+
+footer{background:var(--maroon-deep); color:#b9a98e; text-align:center; padding:2rem; font-size:0.8rem;}
+footer a{color:#cba368; text-decoration:none;}
+
+.reveal{opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="shloka">सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते</div>
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">Website redesign + SEO proposal</p>
+      <h1>A site about balance,<br>slightly <em>out of balance.</em></h1>
+      <p class="lede">Samatvam's story and patient results are genuinely strong. But the site has no phone number, no booking CTA, and an empty Google search listing — three things quietly tipping the scale away from new patients.</p>
+      <div class="hero-cta">
+        <a href="#weak" class="btn btn-primary">See what's tipping it</a>
+        <a href="#cta" class="btn btn-ghost">Skip to the plan</a>
+      </div>
+    </div>
+    <div>
+      <div class="scale-wrap">
+        <svg class="scale-svg tilt" id="heroScale" viewBox="0 0 430 300">
+          <line x1="215" y1="40" x2="215" y2="230" stroke="#cba368" stroke-width="3"/>
+          <circle cx="215" cy="40" r="5" fill="#e3b97a"/>
+          <g class="beam">
+            <line x1="60" y1="70" x2="370" y2="70" stroke="#e3b97a" stroke-width="3"/>
+            <g class="pan-left">
+              <line x1="60" y1="70" x2="60" y2="115" stroke="#cba368" stroke-width="2"/>
+              <path d="M30,115 Q60,140 90,115" fill="none" stroke="#cba368" stroke-width="2"/>
+              <text x="60" y="160" text-anchor="middle" class="scale-label">no phone /</text>
+              <text x="60" y="174" text-anchor="middle" class="scale-label">no booking CTA</text>
+            </g>
+            <g class="pan-right">
+              <line x1="370" y1="70" x2="370" y2="100" stroke="#cba368" stroke-width="2"/>
+              <path d="M340,100 Q370,118 400,100" fill="none" stroke="#cba368" stroke-width="2"/>
+              <text x="370" y="135" text-anchor="middle" class="scale-label">15 yrs experience,</text>
+              <text x="370" y="149" text-anchor="middle" class="scale-label">real testimonials</text>
+            </g>
+          </g>
+          <path d="M170,230 L260,230 L240,260 L190,260 Z" fill="none" stroke="#cba368" stroke-width="2"/>
+          <text x="215" y="285" text-anchor="middle" class="scale-label" font-size="11">currently off-balance</text>
+        </svg>
+        <p class="scale-caption">Strong on substance, weak on the things that turn visitors into patients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEAKNESS -->
+<section id="weak">
+  <div class="section-head reveal">
+    <p class="eyebrow">What's actually happening on the site</p>
+    <h2>Four things quietly costing you patients.</h2>
+    <p>Click each card — what's there today, and what we'd put in its place.</p>
+  </div>
+
+  <div class="weak-grid">
+    <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div><span class="flip-tag">Conversion</span>
+          <h3>No phone number, no booking button</h3>
+          <p>The entire site has just one "Contact Us" link — no click-to-call, no WhatsApp, no "Book a Consultation" anywhere a visitor can act on impulse.</p></div>
+          <span class="flip-hint">Tap to see the fix →</span>
+        </div>
+        <div class="flip-face flip-back">
+          <div><span class="flip-tag">Fix</span>
+          <h3>A CTA on every page</h3>
+          <p>Click-to-call, WhatsApp chat, and a "Book a Consultation" button placed wherever a visitor is convinced — not buried one click away.</p></div>
+          <span class="flip-hint">← Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div><span class="flip-tag">SEO</span>
+          <h3>Google sees an empty listing</h3>
+          <p>The page title is just "Samatvam" with no description at all — so search results show a blank snippet instead of a reason to click.</p></div>
+          <span class="flip-hint">Tap to see the fix →</span>
+        </div>
+        <div class="flip-face flip-back">
+          <div><span class="flip-tag">Fix</span>
+          <h3>Every page written to be found</h3>
+          <p>Real titles and descriptions targeting "Ayurveda consultation," location, and condition-specific searches — so the listing earns the click.</p></div>
+          <span class="flip-hint">← Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div><span class="flip-tag">Trust</span>
+          <h3>Powerful testimonials, hidden away</h3>
+          <p>Three detailed, specific patient stories — anaemia, asthma, IBS — sit at the very bottom of the homepage and nowhere else on the site.</p></div>
+          <span class="flip-hint">Tap to see the fix →</span>
+        </div>
+        <div class="flip-face flip-back">
+          <div><span class="flip-tag">Fix</span>
+          <h3>Proof, placed where doubt lives</h3>
+          <p>The same stories surfaced near the consultation CTA and on relevant service pages — where they actually do the work of convincing.</p></div>
+          <span class="flip-hint">← Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <div><span class="flip-tag">Platform</span>
+          <h3>Squarespace, last touched in 2021</h3>
+          <p>The footer still reads "© DR MOGHE'S 2021." Squarespace also can't support custom booking flows, WhatsApp automation, or real lead tracking.</p></div>
+          <span class="flip-hint">Tap to see the fix →</span>
+        </div>
+        <div class="flip-face flip-back">
+          <div><span class="flip-tag">Fix</span>
+          <h3>A platform built to grow with the practice</h3>
+          <p>A modern, fast, fully custom site — with room to add booking, automation, and analytics as the practice grows.</p></div>
+          <span class="flip-hint">← Tap to flip back</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="proof-strip reveal">
+  <div class="item">📞 <strong>0</strong> phone numbers visible on the site</div>
+  <div class="item">🔍 <strong>Blank</strong> Google search description</div>
+  <div class="item">🕓 Footer copyright — <strong>2021</strong></div>
+</div>
+
+<!-- FIX -->
+<section class="fix-section">
+  <div class="section-head reveal">
+    <p class="eyebrow">The rebuild, line by line</p>
+    <h2 style="color:var(--paper)">What changes, exactly.</h2>
+  </div>
+
+  <div class="fix-list">
+    <div class="fix-row reveal">
+      <div class="fix-num">01</div>
+      <h4>No phone, no booking CTA</h4>
+      <p class="now">A <b>click-to-call and WhatsApp button</b> on every page, plus a clear "Book a Consultation" path from the homepage.</p>
+    </div>
+    <div class="fix-row reveal">
+      <div class="fix-num">02</div>
+      <h4>Blank Google search listing</h4>
+      <p class="now"><b>SEO-written titles &amp; descriptions</b> for every page, targeting the searches patients are already typing.</p>
+    </div>
+    <div class="fix-row reveal">
+      <div class="fix-num">03</div>
+      <h4>Testimonials buried at the bottom</h4>
+      <p class="now"><b>Patient stories surfaced</b> near every consultation CTA and on the relevant service pages.</p>
+    </div>
+    <div class="fix-row reveal">
+      <div class="fix-num">04</div>
+      <h4>Squarespace, frozen since 2021</h4>
+      <p class="now">A <b>modern custom-built site</b> — fast, mobile-first, and ready for booking automation as the practice grows.</p>
+    </div>
+    <div class="fix-row reveal">
+      <div class="fix-num">05</div>
+      <h4>Unnamed images, no alt text</h4>
+      <p class="now"><b>Descriptive, SEO-friendly image content</b> — so the clinic's own photos help it get found, not just decorate the page.</p>
+    </div>
+    <div class="fix-row reveal">
+      <div class="fix-num">06</div>
+      <h4>No structured data for a medical practice</h4>
+      <p class="now"><b>Physician &amp; LocalBusiness schema</b> so Samatvam is positioned properly for local and Google Maps search.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<section class="outcome">
+  <div class="section-head reveal" style="margin-left:auto; margin-right:auto; text-align:center;">
+    <p class="eyebrow">Why this matters</p>
+    <h2>The same substance. Finally balanced.</h2>
+  </div>
+
+  <div class="scale-wrap reveal">
+    <svg class="scale-svg balanced" viewBox="0 0 430 260">
+      <line x1="215" y1="40" x2="215" y2="200" stroke="#5b2333" stroke-width="3"/>
+      <circle cx="215" cy="40" r="5" fill="#33483b"/>
+      <g class="beam" style="transform-origin:215px 70px;">
+        <line x1="60" y1="70" x2="370" y2="70" stroke="#33483b" stroke-width="3"/>
+        <g class="pan-left">
+          <line x1="60" y1="70" x2="60" y2="105" stroke="#5b2333" stroke-width="2"/>
+          <path d="M30,105 Q60,125 90,105" fill="none" stroke="#5b2333" stroke-width="2"/>
+          <text x="60" y="148" text-anchor="middle" class="scale-label" fill="#5a4d42">Found &amp; chosen online</text>
+        </g>
+        <g class="pan-right">
+          <line x1="370" y1="70" x2="370" y2="105" stroke="#5b2333" stroke-width="2"/>
+          <path d="M340,105 Q370,125 400,105" fill="none" stroke="#5b2333" stroke-width="2"/>
+          <text x="370" y="148" text-anchor="middle" class="scale-label" fill="#5a4d42">15 yrs of real results</text>
+        </g>
+      </g>
+      <path d="M170,200 L260,200 L240,225 L190,225 Z" fill="none" stroke="#5b2333" stroke-width="2"/>
+      <text x="215" y="250" text-anchor="middle" class="scale-label" fill="#33483b" font-size="12" font-weight="700">in samatvam — balance</text>
+    </svg>
+  </div>
+
+  <div class="outcome-grid">
+    <div class="outcome-card reveal">
+      <p class="eyebrow">SEO</p>
+      <h3>Found for the right searches</h3>
+      <p>Real titles, descriptions, and schema mean the practice shows up for local Ayurveda searches instead of a blank listing.</p>
+    </div>
+    <div class="outcome-card reveal">
+      <p class="eyebrow">Conversion</p>
+      <h3>A clear path to "yes"</h3>
+      <p>Click-to-call, WhatsApp, and visible testimonials mean a convinced visitor never has to go hunting for how to reach you.</p>
+    </div>
+    <div class="outcome-card reveal">
+      <p class="eyebrow">Platform</p>
+      <h3>Room to grow</h3>
+      <p>A custom build means booking automation, lead tracking, and new features can be added — not boxed in by a template platform.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <p class="eyebrow" style="color:#fffaf0;">Next step</p>
+  <h2>Let's bring it back into balance.</h2>
+  <p>The story and the results are already there. Let's build a site that puts them in front of the people searching for exactly this.</p>
+  <a href="https://wa.me/919921880362?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20the%20Samatvam%20website%20redesign%20%2B%20SEO%20proposal" class="btn btn-primary" target="_blank" rel="noopener">Chat with us on WhatsApp</a>
+  <div class="cta-contacts">
+    <span>📱 +91 99218 80362</span>
+    <span>✉️ hello@codeq.tech</span>
+    <span>🌐 codeq.tech</span>
+  </div>
+</section>
+
+<footer>Prepared by <a href="https://codeq.tech" target="_blank" rel="noopener">codeq.tech</a> for Samatvam — Dr Vishakha Moghe's Ayurvedic practice</footer>
+
+<script>
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
