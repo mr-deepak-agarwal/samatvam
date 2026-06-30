@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samatvam — Growth Roadmap & Proposal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Spectral:ital@1&display=swap');
+
+  :root{
+    --bg: #FBF8F2;
+    --ink: #2E2A24;
+    --ink-soft: #6B6457;
+    --clay: #B5562F;
+    --leaf: #4C6B4F;
+    --leaf-deep: #2F4731;
+    --gold: #C49A3C;
+    --line: #E4DCC8;
+    --card: #FFFFFF;
+    --max: 920px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3,.serif{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .sanskrit{
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 100px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    top: -120px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(76,107,79,0.06) 0%, transparent 70%);
+    pointer-events:none;
+  }
+
+  .eyebrow-mantra{
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 28px;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+
+  .hero h1{
+    font-size: clamp(34px, 5.5vw, 54px);
+    line-height: 1.12;
+    max-width: 760px;
+    margin: 0 auto 22px;
+  }
+
+  .hero h1 em{
+    font-style: italic;
+    color: var(--leaf);
+  }
+
+  .hero p.lede{
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .hero-tags{
+    display:flex;
+    justify-content:center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+  }
+
+  .tag{
+    font-size: 13px;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    background: var(--card);
+  }
+
+  /* ---------- BALANCE BAR (signature element) ---------- */
+  .balance-section{
+    padding: 0 0 80px;
+  }
+
+  .balance-frame{
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 18px;
+    padding: 44px 36px;
+  }
+
+  .balance-frame h2{
+    font-size: 24px;
+    margin-bottom: 8px;
+    text-align:center;
+  }
+
+  .balance-frame .sub{
+    text-align:center;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 36px;
+  }
+
+  .scale-row{
+    display:flex;
+    align-items:center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+
+  .scale-row:last-child{margin-bottom:0;}
+
+  .scale-label{
+    width: 120px;
+    flex-shrink:0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align:right;
+  }
+
+  .scale-track{
+    flex:1;
+    height: 10px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .scale-fill{
+    height:100%;
+    border-radius: 999px;
+  }
+
+  .scale-fill.before{ background: var(--clay); }
+  .scale-fill.after{ background: var(--leaf); }
+
+  .scale-val{
+    width: 56px;
+    flex-shrink:0;
+    font-size: 13px;
+    font-weight:600;
+  }
+
+  .scale-val.before{ color: var(--clay); }
+  .scale-val.after{ color: var(--leaf-deep); }
+
+  .scale-divider{
+    text-align:center;
+    font-size: 12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color: var(--ink-soft);
+    margin: 28px 0 18px;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{
+    padding: 70px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head{
+    margin-bottom: 48px;
+  }
+
+  .section-eyebrow{
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--leaf);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section h2{
+    font-size: clamp(26px, 4vw, 36px);
+    max-width: 600px;
+  }
+
+  .section p.section-sub{
+    color: var(--ink-soft);
+    margin-top: 14px;
+    max-width: 540px;
+    font-size: 16px;
+  }
+
+  /* ---------- MILESTONES ---------- */
+  .milestone{
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 28px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .milestone:first-of-type{ border-top: none; }
+
+  .m-mark{
+    font-family:'Fraunces', serif;
+    font-size: 15px;
+    color: var(--gold);
+    padding-top: 4px;
+  }
+
+  .m-phase{
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .m-title{
+    font-size: 21px;
+    margin-bottom: 12px;
+  }
+
+  .m-items{
+    list-style:none;
+    margin-bottom: 18px;
+  }
+
+  .m-items li{
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .m-items li::before{
+    content:"";
+    position:absolute;
+    left:0; top: 9px;
+    width: 5px; height: 5px;
+    border-radius:50%;
+    background: var(--leaf);
+  }
+
+  .m-goal{
+    background: #F4F2E9;
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14.5px;
+  }
+
+  .m-goal strong{
+    color: var(--leaf-deep);
+    font-family:'Fraunces', serif;
+    font-weight: 500;
+    display:block;
+    margin-bottom: 3px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- SUPPORT BAND ---------- */
+  .support-band{
+    background: var(--leaf-deep);
+    color: #F4F2E9;
+    border-radius: 18px;
+    padding: 44px 40px;
+    margin-top: 10px;
+  }
+
+  .support-band h3{
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .support-band p{
+    color: #C9D4C8;
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  .support-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  .support-item{
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+  }
+
+  .support-item .num{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 15px;
+    margin-bottom: 6px;
+    display:block;
+  }
+
+  .support-item p{
+    color: #DCE4DA;
+    font-size: 14px;
+  }
+
+  /* ---------- COSTING ---------- */
+  .cost-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .cost-top{
+    padding: 40px 40px 32px;
+    text-align:center;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .cost-top .price{
+    font-family:'Fraunces', serif;
+    font-size: 56px;
+    color: var(--leaf-deep);
+    margin: 6px 0;
+  }
+
+  .cost-top .price span{
+    font-size: 22px;
+    color: var(--ink-soft);
+    font-family:'Inter', sans-serif;
+  }
+
+  .cost-top .price-label{
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+
+  .cost-includes{
+    padding: 32px 40px;
+  }
+
+  .cost-includes h4{
+    font-family:'Fraunces', serif;
+    font-size: 16px;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  .cost-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+
+  .cost-list li{
+    font-size: 14.5px;
+    padding-left: 20px;
+    position:relative;
+    color: var(--ink);
+  }
+
+  .cost-list li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color: var(--leaf);
+    font-weight:700;
+    font-size: 13px;
+  }
+
+  .cost-support{
+    background: #F4F2E9;
+    padding: 28px 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .cost-support h4{
+    font-family:'Fraunces', serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--leaf-deep);
+    font-weight: 500;
+  }
+
+  .cost-support p{
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .cost-note{
+    padding: 22px 40px 36px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- TIMELINE STRIP ---------- */
+  .timeline-strip{
+    display:flex;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow:hidden;
+    margin-bottom: 48px;
+  }
+
+  .t-cell{
+    flex:1;
+    padding: 18px 16px;
+    text-align:center;
+    border-right: 1px solid var(--line);
+    background: var(--card);
+  }
+
+  .t-cell:last-child{ border-right:none; background: var(--leaf-deep); }
+  .t-cell:last-child .t-week{ color: var(--gold); }
+  .t-cell:last-child .t-label{ color: #DCE4DA; }
+
+  .t-week{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    color: var(--leaf);
+    font-size: 14px;
+    display:block;
+    margin-bottom: 4px;
+  }
+
+  .t-label{
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-section{
+    text-align:center;
+    padding: 90px 0 100px;
+  }
+
+  .cta-section h2{
+    font-size: clamp(26px, 4vw, 36px);
+    max-width: 520px;
+    margin: 0 auto 16px;
+  }
+
+  .cta-section p{
+    color: var(--ink-soft);
+    max-width: 460px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-buttons{
+    display:flex;
+    gap: 14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration:none;
+    transition: transform 0.15s ease;
+  }
+
+  .btn:hover{ transform: translateY(-1px); }
+
+  .btn-primary{
+    background: var(--leaf-deep);
+    color: #fff;
+  }
+
+  .btn-secondary{
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  footer{
+    text-align:center;
+    padding: 36px 0 50px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  footer a{ color: var(--leaf-deep); text-decoration:none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 680px){
+    .hero{ padding: 70px 0 56px; }
+    .milestone{ grid-template-columns: 1fr; gap: 10px; }
+    .m-mark{ padding-top:0; }
+    .support-grid{ grid-template-columns: 1fr; }
+    .cost-list{ grid-template-columns: 1fr; }
+    .scale-label{ width: 78px; font-size: 11.5px; }
+    .scale-val{ width: 42px; font-size: 12px; }
+    .timeline-strip{ flex-direction: column; }
+    .t-cell{ border-right:none; border-bottom: 1px solid var(--line); }
+    .t-cell:last-child{ border-bottom:none; }
+    .cost-top, .cost-includes, .cost-support, .cost-note{ padding-left: 24px; padding-right: 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow-mantra">सिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते</div>
+    <h1>The plan to bring Samatvam <em>fully into balance</em> online.</h1>
+    <p class="lede">Same brand. Same story. A complete 6-month package — site rebuild, SEO, and continuous support — so Samatvam works as hard online as Dr Moghe does in clinic.</p>
+    <div class="hero-tags">
+      <span class="tag">6 milestones</span>
+      <span class="tag">6-month package</span>
+      <span class="tag">Brand untouched</span>
+      <span class="tag">Continuous SEO support</span>
+    </div>
+  </div>
+</section>
+
+<!-- BALANCE BAR -->
+<section class="balance-section">
+  <div class="wrap">
+    <div class="balance-frame">
+      <h2>Where the scale tips today</h2>
+      <p class="sub">What changes between the site as it stands, and the site after this proposal.</p>
+
+      <div class="scale-row">
+        <span class="scale-label">Phone visibility</span>
+        <div class="scale-track"><div class="scale-fill before" style="width:6%"></div></div>
+        <span class="scale-val before">0 pages</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-label">Phone visibility</span>
+        <div class="scale-track"><div class="scale-fill after" style="width:100%"></div></div>
+        <span class="scale-val after">6 pages</span>
+      </div>
+
+      <div class="scale-divider">— after milestone 1 —</div>
+
+      <div class="scale-row">
+        <span class="scale-label">Google listing</span>
+        <div class="scale-track"><div class="scale-fill before" style="width:4%"></div></div>
+        <span class="scale-val before">Blank</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-label">Google listing</span>
+        <div class="scale-track"><div class="scale-fill after" style="width:100%"></div></div>
+        <span class="scale-val after">Written</span>
+      </div>
+
+      <div class="scale-divider">— after milestone 2 —</div>
+
+      <div class="scale-row">
+        <span class="scale-label">Testimonial reach</span>
+        <div class="scale-track"><div class="scale-fill before" style="width:15%"></div></div>
+        <span class="scale-val before">1 page</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-label">Testimonial reach</span>
+        <div class="scale-track"><div class="scale-fill after" style="width:100%"></div></div>
+        <span class="scale-val after">Site-wide</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" style="border-top:none; padding-top:0;">
+  <div class="wrap">
+    <div class="timeline-strip">
+      <div class="t-cell"><span class="t-week">Week 1–2</span><span class="t-label">Rebuild + Booking</span></div>
+      <div class="t-cell"><span class="t-week">Week 2–3</span><span class="t-label">SEO Foundation</span></div>
+      <div class="t-cell"><span class="t-week">Week 3</span><span class="t-label">Local Search Setup</span></div>
+      <div class="t-cell"><span class="t-week">Week 3–4</span><span class="t-label">Trust Layer</span></div>
+      <div class="t-cell"><span class="t-week">Week 4</span><span class="t-label">Tracking Live</span></div>
+      <div class="t-cell"><span class="t-week">Month 2–6</span><span class="t-label">Continuous SEO Support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">The Work</div>
+      <h2>Six milestones, each with a clear outcome.</h2>
+      <p class="section-sub">Every milestone below ships something visible — not just backend changes you have to take our word for.</p>
+    </div>
+
+    <!-- Milestone 1 -->
+    <div class="milestone">
+      <div class="m-mark">I.</div>
+      <div>
+        <div class="m-phase">Week 1–2 · Foundation</div>
+        <h3 class="m-title">Core Rebuild &amp; Booking Path</h3>
+        <ul class="m-items">
+          <li>Rebuild all 6 pages — Home, About Us, Offerings, Wisdom Blog, Event Gallery, Contact — on a modern, fast platform</li>
+          <li>Brand kit migrated exactly: same colours, logo, fonts, and tone of voice</li>
+          <li>Click-to-call and WhatsApp button added to every page, mobile-sticky</li>
+          <li>"Book a Consultation" placed in the navigation, homepage, and footer</li>
+          <li>Fixed the broken Offerings / Services link inconsistency</li>
+          <li>Removed leftover Squarespace clutter (unused cart page, outdated footer year)</li>
+          <li>Built mobile-first, targeting sub-3-second load time and a 90+ mobile speed score</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          A visitor on any page, on any device, can call or message Samatvam within five seconds — without hunting for how, and without waiting for a slow page to load.
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone 2 -->
+    <div class="milestone">
+      <div class="m-mark">II.</div>
+      <div>
+        <div class="m-phase">Week 2–3 · Discoverability</div>
+        <h3 class="m-title">SEO Foundation</h3>
+        <ul class="m-items">
+          <li>Unique, written title and meta description for every page (currently blank)</li>
+          <li>Keyword research conducted by us — identifying the exact searches patients are typing, condition by condition</li>
+          <li>Page content and copy refined in close discussion with Dr Moghe, so nothing is published without her sign-off</li>
+          <li>Heading structure (H1/H2) corrected across the site</li>
+          <li>Descriptive alt text added to every image, including the Event Gallery</li>
+          <li>Canonical tags fixed to prevent duplicate-page confusion</li>
+          <li>Internal links connecting Offerings, Testimonials, and Contact</li>
+          <li>Initial backlink strategy mapped out — relevant Ayurveda/wellness directories and local citation sources identified for future outreach</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          Every page earns a real, written snippet on Google, built around the searches patients actually use — instead of the current blank listing that gets skipped.
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone 3 -->
+    <div class="milestone">
+      <div class="m-mark">III.</div>
+      <div>
+        <div class="m-phase">Week 3 · Local Search</div>
+        <h3 class="m-title">Structured Data &amp; Local Search Setup</h3>
+        <ul class="m-items">
+          <li>Physician schema added — Dr Moghe's BAMS qualification, 15 years' experience, Marma massage specialty</li>
+          <li>LocalBusiness schema — address, hours, phone, mapped for Google</li>
+          <li>Google Business Profile claimed, cleaned up, and fully completed</li>
+          <li>Name, address, and phone number made consistent everywhere online</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          Samatvam becomes eligible to appear on Google Maps and the local pack — not just in plain organic search.
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone 4 -->
+    <div class="milestone">
+      <div class="m-mark">IV.</div>
+      <div>
+        <div class="m-phase">Week 3–4 · Trust</div>
+        <h3 class="m-title">Trust &amp; Conversion Layer</h3>
+        <ul class="m-items">
+          <li>Testimonials (anaemia, asthma, IBS) placed near every consultation CTA, not just the homepage footer</li>
+          <li>Same testimonials surfaced on the relevant Offerings pages where they're most persuasive</li>
+          <li>Founder credentials (SVYASA certification, published Ayurvedic recipes) given proper visibility on the About page</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          Proof sits exactly where doubt would otherwise stop someone from booking.
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone 5 -->
+    <div class="milestone">
+      <div class="m-mark">V.</div>
+      <div>
+        <div class="m-phase">Week 4 · Measurement</div>
+        <h3 class="m-title">Analytics &amp; Tracking</h3>
+        <ul class="m-items">
+          <li>GA4 installed and configured across the site</li>
+          <li>Call and WhatsApp click tracking set up</li>
+          <li>Contact form submissions tracked as a measurable goal</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          You can see, in numbers, exactly how many people called, messaged, or enquired each month — not a guess.
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone 6 -->
+    <div class="milestone">
+      <div class="m-mark">VI.</div>
+      <div>
+        <div class="m-phase">Launch · Quality, Handover &amp; Ongoing SEO Begins</div>
+        <h3 class="m-title">Testing, Launch &amp; Handover</h3>
+        <ul class="m-items">
+          <li>Cross-device and cross-browser testing before go-live</li>
+          <li>Site speed and Core Web Vitals optimisation</li>
+          <li>Domain connected and site submitted to Google for indexing</li>
+          <li>Walkthrough call so the practice can update content independently going forward</li>
+        </ul>
+        <div class="m-goal">
+          <strong>Goal on completion</strong>
+          A fast, fully live site that the practice understands and can rely on — backed by 6 months of support that follows.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="section">
+  <div class="wrap">
+    <div class="support-band">
+      <h3>5 months of continuous SEO, built into the package.</h3>
+      <p>Launch is month one. For the 5 months after, we stay close — actively working on SEO, fixing issues, and making small adjustments — not just watching from a distance.</p>
+      <div class="support-grid">
+        <div class="support-item">
+          <span class="num">i.</span>
+          <p>Ongoing on-page SEO refinement and backlink outreach, month over month</p>
+        </div>
+        <div class="support-item">
+          <span class="num">ii.</span>
+          <p>Monthly check on Google rankings, listing health, and site uptime</p>
+        </div>
+        <div class="support-item">
+          <span class="num">iii.</span>
+          <p>Direct WhatsApp access to us for anything that comes up — no ticket system, no waiting</p>
+        </div>
+      </div>
+      <p style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.15); color:#DCE4DA;">From month 7 onward, continuing support is a simple <strong style="color:#fff;">₹5,000/month</strong> — no obligation to continue, cancel anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COSTING -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Investment</div>
+      <h2>One number. Six months. Everything included.</h2>
+      <p class="section-sub">No phased pricing, no surprise add-ons — this covers the rebuild, every milestone, and 5 months of continuous SEO support after launch.</p>
+    </div>
+
+    <div class="cost-card">
+      <div class="cost-top">
+        <div class="price-label">Complete 6-month package</div>
+        <div class="price">₹42,000</div>
+        <div class="price-label">website rebuild + all 6 milestones + 5 months continuous SEO</div>
+      </div>
+      <div class="cost-includes">
+        <h4>What's included across the 6 months</h4>
+        <ul class="cost-list">
+          <li>Full 6-page site rebuild</li>
+          <li>Brand kit fully preserved</li>
+          <li>Click-to-call + WhatsApp on every page</li>
+          <li>Booking CTA placement</li>
+          <li>SEO titles &amp; meta for every page</li>
+          <li>Image alt text &amp; technical SEO fixes</li>
+          <li>Physician &amp; LocalBusiness schema</li>
+          <li>Google Business Profile setup</li>
+          <li>Testimonials repositioned for conversion</li>
+          <li>Keyword research &amp; backlink strategy</li>
+          <li>GA4 + call/WhatsApp/form tracking</li>
+          <li>Speed &amp; Core Web Vitals optimisation</li>
+          <li>Handover walkthrough call</li>
+          <li>5 months of continuous SEO effort post-launch</li>
+        </ul>
+      </div>
+      <div class="cost-includes" style="border-top: 1px solid var(--line); padding-top:28px;">
+        <h4>Payment terms</h4>
+        <ul class="cost-list" style="grid-template-columns: 1fr 1fr;">
+          <li>₹15,000 to begin work</li>
+          <li>₹27,000 on delivery of all milestones</li>
+        </ul>
+      </div>
+      <div class="cost-note">
+        Domain and hosting costs (if not already held by the practice) are billed separately at actual cost, with options shared before purchase. From month 7 onward, continuing support and SEO is available at ₹5,000/month, with no lock-in.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Let's bring it back into balance.</h2>
+    <p>The story and the results are already there. Let's build a site that puts them in front of the people searching for exactly this.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/919921880362?text=Hi%2C%20I%27d%20like%20to%20go%20ahead%20with%20the%20Samatvam%20website%20%2B%20SEO%20proposal%20at%20%E2%82%B940%2C000" class="btn btn-primary">Confirm on WhatsApp</a>
+      <a href="mailto:hello@codeq.tech" class="btn btn-secondary">Email Questions</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Prepared by <a href="https://codeq.tech">codeq.tech</a> for Samatvam — Dr Vishakha Moghe's Ayurvedic practice
+</footer>
+
+</body>
+</html>
